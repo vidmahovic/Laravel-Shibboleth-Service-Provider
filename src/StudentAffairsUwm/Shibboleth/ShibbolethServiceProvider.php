@@ -26,9 +26,6 @@ class ShibbolethServiceProvider extends ServiceProvider
         // Publish the configuration, migrations, and User / Group models
         $this->publishes([
             __DIR__ . '/../../config/shibboleth.php' => config_path('shibboleth.php'),
-            __DIR__ . '/../../database/migrations/'  => base_path('/database/migrations'),
-            __DIR__ . '/User.php'                     => base_path('/app/User.php'),
-            __DIR__ . '/Group.php'                    => base_path('/app/Group.php'),
         ]);
 
         include __DIR__ . '/../../routes.php';
