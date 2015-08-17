@@ -41,7 +41,7 @@ class ShibbolethUserProvider implements UserProviderInterface
      */
     public function retrieveById($identifier)
     {
-        $user = $this->retrieveByCredentials(['id' => $identifier]);
+        $user = $this->retrieveByCredentials(['id' => $identifier, 'primary_affiliation' => 'faculty']);
         return ($user && $user->getAuthIdentifier() == $identifier) ? $user : null;
     }
 
@@ -80,8 +80,7 @@ class ShibbolethUserProvider implements UserProviderInterface
      */
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
-        return ($credentials['type'] === 'shibboleth') 
-            ? true : $this->hasher->check($credentials['password'], $user->getAuthPassword());
+        return $credentials['primary_affiliation'] === 'faculty';
     }
 
     /**
